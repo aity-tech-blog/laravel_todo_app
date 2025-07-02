@@ -1,0 +1,47 @@
+@startuml
+!define primary_key(x) <b>x</b>
+!define foreign_key(x) <i>x</i>
+
+entity "task_groups" as task_group {
+    primary_key(groupe_id): [グループID]
+    --
+    groupe_name: [グループ名]
+    created_at: [作成日時]
+    updated_at: [更新日時]
+}
+
+entity "tasks" as task {
+    primary_key(task_id): [タスクID]
+    --
+    task_name: [タスク名]
+    description: [説明]
+    done: [完了フラグ]
+    ' 開始予定日
+    start_date: [開始予定日]
+    end_date: [期限]
+    created_at: [作成日時]
+    updated_at: [更新日時]
+    foreign_key(groupe_id): [グループID（外部キー）]
+}
+
+entity "tags" as tag {
+    primary_key(id): [タグID]
+    --
+    tag_name: [タグ名]
+    created_at: [作成日時]
+    updated_at: [更新日時]
+}
+
+entity "task_tags" as task_tag {
+    foreign_key(task_id): [タスクID（外部キー）]
+    foreign_key(tag_id): [タグID（外部キー）]
+    --
+    created_at: [作成日時]
+    updated_at: [更新日時]
+}
+
+' リレーション定義
+task_group ||--o{ task : 所属
+task ||--o{ task_tag : タグ付与
+tag ||--o{ task_tag : タグ分類
+@enduml
