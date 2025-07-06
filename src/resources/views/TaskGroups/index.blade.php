@@ -10,7 +10,7 @@
                 showModalId: "{{ session('show_modal_id') }}",
             };
         </script>
-        @vite(['resources/js/TaskGroup/index.js'])
+        @vite(['resources/js/TaskGroups/index.js'])
     @endif
 @endsection
 
@@ -32,7 +32,7 @@
                 </button>
 
                 <!-- Modal -->
-                @include('form', [
+                @include('TaskGroups.form', [
                     'form_action' => route('task-groups.store'),
                     'modal_id' => 'createGroupModal',
                     'is_edit' => false,
@@ -80,14 +80,14 @@
                         </div>
                     </li>
                     <!-- 更新モーダル -->
-                    @include('form', [
+                    @include('TaskGroups.form', [
                         'form_action' => route('task-groups.update', $taskGroup->group_id),
                         'modal_id' => 'editGroupModal' . $taskGroup->group_id,
                         'is_edit' => true,
                         'taskGroup' => $taskGroup
                     ])
                     <!-- 削除モーダル -->
-                    @include('delete', ['taskGroup' => $taskGroup])
+                    @include('TaskGroups.delete', ['taskGroup' => $taskGroup])
                 @endforeach
             </ul>
         </div>

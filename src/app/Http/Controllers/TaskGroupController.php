@@ -18,7 +18,7 @@ class TaskGroupController extends Controller
     {
         // $groups = TaskGroup::all(); // 全グループ取得
         $taskGroups = TaskGroup::select('group_id','group_name')->get(); // グループ名のみ取得
-        return view('index', compact('taskGroups'));
+        return view('TaskGroups.index', compact('taskGroups'));
     }
 
     /**
